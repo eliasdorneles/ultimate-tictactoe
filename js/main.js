@@ -35,14 +35,8 @@ var TicTacToeCtrl = function ($scope) {
     }
 
     $scope.bigBoard = createBigBoard();
-
 //    $scope.bigBoard[TOP][LEFT].repr[TOP][LEFT] = marks.X;
 //    $scope.bigBoard[TOP][LEFT].repr[TOP][CENTER] = marks.O;
-//
-//    $scope.bigBoard[TOP][CENTER].repr[TOP][CENTER] = marks.O;
-//    $scope.bigBoard[CENTER][CENTER].repr[CENTER][CENTER] = marks.X;
-//    $scope.bigBoard[BOTTOM][RIGHT].repr[BOTTOM][RIGHT] = marks.X;
-//    $scope.bigBoard[TOP][CENTER].repr[BOTTOM][LEFT] = marks.O;
 
     $scope.playerX = {
         name: 'X',
@@ -70,14 +64,22 @@ var TicTacToeCtrl = function ($scope) {
 
     $scope.play = function (bbY, bbX, y, x) {
         console.log('lastPlay', $scope.lastPlay);
-        if (isValidPlay(bbY, bbX, y, x)) {
-            $scope.bigBoard[bbY][bbX].repr[y][x] = $scope.currentPlayer.mark;
+        if (!isValidPlay(bbY, bbX, y, x)) {
+            console.log('Invalid play');
+            return;
+        }
+        $scope.bigBoard[bbY][bbX].repr[y][x] = $scope.currentPlayer.mark;
 
-            // TODO: bloquear todos os boards, liberar y, x
-            // TODO: detectar se board teve game over
+        // TODO: bloquear todos os boards, liberar y, x
+        // TODO: detectar se board teve game over
 
-            $scope.currentPlayer = ($scope.currentPlayer == $scope.playerX) ? $scope.playerO : $scope.playerX;
-            $scope.lastPlay = { y: y, x: x }
+        $scope.currentPlayer = ($scope.currentPlayer == $scope.playerX) ? $scope.playerO : $scope.playerX;
+        $scope.lastPlay = { y: y, x: x }
+
+        for (var i = 0; i < 3; i++) {
+            for (var j = 0; j < 3; j++) {
+                $scope.bigBoard[i][j].state = (i == y && j == x) ? boardState.OPEN : boardState.LOCKED;
+            }
         }
     };
 }

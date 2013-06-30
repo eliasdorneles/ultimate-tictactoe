@@ -35,3 +35,7 @@ input {
     border: 5px solid darkgreen;
     background-color: green;
 }
+
+.locked {
+    background-color: #ddd;
+}
