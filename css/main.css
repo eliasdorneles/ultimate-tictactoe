@@ -19,21 +19,21 @@ input {
     display: block;
     width: 40px;
     height: 40px;
-}
-
-.empty {
+    background-image: url("../img/sprite.png");
+    background-position: 40px;
     border: 1px solid black;
 }
 
-.markX {
-    border: 5px solid darkred;
-    background-color: red;
+.empty {
+    background-position: 40px !important;
 }
 
+.markX {
+    background-position: 0px !important;
+}
 
 .markO {
-    border: 5px solid darkgreen;
-    background-color: green;
+    background-position: 80px !important;
 }
 
 .board-locked {
