@@ -36,6 +36,10 @@ input {
     background-color: green;
 }
 
-.locked {
+.board-locked {
     background-color: #ddd;
+}
+
+.board-open {
+    background-color: transparent;
 }

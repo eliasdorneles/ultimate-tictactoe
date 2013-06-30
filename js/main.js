@@ -11,8 +11,8 @@ var TicTacToeCtrl = function ($scope) {
     const BOTTOM = 2;
 
     var boardState = {
-        OPEN: "open",
-        LOCKED: "locked"
+        OPEN: "board-open",
+        LOCKED: "board-locked"
     }
 
     function createMiniBoard() {
@@ -35,8 +35,6 @@ var TicTacToeCtrl = function ($scope) {
     }
 
     $scope.bigBoard = createBigBoard();
-//    $scope.bigBoard[TOP][LEFT].repr[TOP][LEFT] = marks.X;
-//    $scope.bigBoard[TOP][LEFT].repr[TOP][CENTER] = marks.O;
 
     $scope.playerX = {
         name: 'X',
@@ -51,35 +49,52 @@ var TicTacToeCtrl = function ($scope) {
 
     $scope.lastPlay = undefined;
 
+    function isBoardFull(bbY, bbX) {
+        var bigboardRepr = $scope.bigBoard[bbY][bbX].repr;
+        for (var i = 0; i < bigboardRepr.length; i++) {
+            var lineBoard = bigboardRepr[i];
+            for (var j = 0; j < lineBoard.length; j++) {
+                if (lineBoard[j] == marks.empty) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     function isValidPlay(bbY, bbX, y, x) {
         var currentMark = $scope.bigBoard[bbY][bbX].repr[y][x];
-        if ($scope.lastPlay) {
-            // TODO: se estiver cheio, deixar passar
-            if (bbY != $scope.lastPlay.y || bbX != $scope.lastPlay.x) {
-                return false;
-            }
+        if ($scope.lastPlay && $scope.bigBoard[bbY][bbX].state == boardState.LOCKED) {
+            return false;
         }
         return currentMark == marks.empty;
     }
 
+    function lockInvalidBoards(y, x) {
+        var isNextBoardAlreadyFull = isBoardFull(y, x);
+        for (var i = 0; i < 3; i++) {
+            for (var j = 0; j < 3; j++) {
+                if (isNextBoardAlreadyFull) {
+                    $scope.bigBoard[i][j].state = (i == y && j == x) ? boardState.LOCKED : boardState.OPEN;
+                } else {
+                    $scope.bigBoard[i][j].state = (i == y && j == x) ? boardState.OPEN : boardState.LOCKED;
+                }
+            }
+        }
+    }
+
     $scope.play = function (bbY, bbX, y, x) {
-        console.log('lastPlay', $scope.lastPlay);
         if (!isValidPlay(bbY, bbX, y, x)) {
             console.log('Invalid play');
             return;
         }
         $scope.bigBoard[bbY][bbX].repr[y][x] = $scope.currentPlayer.mark;
 
-        // TODO: bloquear todos os boards, liberar y, x
         // TODO: detectar se board teve game over
 
         $scope.currentPlayer = ($scope.currentPlayer == $scope.playerX) ? $scope.playerO : $scope.playerX;
         $scope.lastPlay = { y: y, x: x }
 
-        for (var i = 0; i < 3; i++) {
-            for (var j = 0; j < 3; j++) {
-                $scope.bigBoard[i][j].state = (i == y && j == x) ? boardState.OPEN : boardState.LOCKED;
-            }
-        }
+        lockInvalidBoards(y, x);
     };
 }
