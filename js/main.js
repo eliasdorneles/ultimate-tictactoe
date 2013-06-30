@@ -57,7 +57,7 @@ var TicTacToeCtrl = function ($scope) {
 
     $scope.currentPlayer = $scope.playerX;
 
-    $scope.play = function (bbY, bbX, x, y) {
+    $scope.play = function (bbY, bbX, y, x) {
         $scope.bigBoard[bbY][bbX].repr[y][x] = $scope.currentPlayer.mark;
         $scope.currentPlayer = ($scope.currentPlayer == $scope.playerX) ? $scope.playerO : $scope.playerX;
     };
