@@ -46,19 +46,38 @@ var TicTacToeCtrl = function ($scope) {
 
     $scope.playerX = {
         name: 'X',
-        mark: marks.X,
-        lastPlay: undefined
+        mark: marks.X
     };
     $scope.playerO = {
         name: 'O',
-        mark: marks.O,
-        lastPlay: undefined
+        mark: marks.O
     };
 
     $scope.currentPlayer = $scope.playerX;
 
+    $scope.lastPlay = undefined;
+
+    function isValidPlay(bbY, bbX, y, x) {
+        var currentMark = $scope.bigBoard[bbY][bbX].repr[y][x];
+        if ($scope.lastPlay) {
+            // TODO: se estiver cheio, deixar passar
+            if (bbY != $scope.lastPlay.y || bbX != $scope.lastPlay.x) {
+                return false;
+            }
+        }
+        return currentMark == marks.empty;
+    }
+
     $scope.play = function (bbY, bbX, y, x) {
-        $scope.bigBoard[bbY][bbX].repr[y][x] = $scope.currentPlayer.mark;
-        $scope.currentPlayer = ($scope.currentPlayer == $scope.playerX) ? $scope.playerO : $scope.playerX;
+        console.log('lastPlay', $scope.lastPlay);
+        if (isValidPlay(bbY, bbX, y, x)) {
+            $scope.bigBoard[bbY][bbX].repr[y][x] = $scope.currentPlayer.mark;
+
+            // TODO: bloquear todos os boards, liberar y, x
+            // TODO: detectar se board teve game over
+
+            $scope.currentPlayer = ($scope.currentPlayer == $scope.playerX) ? $scope.playerO : $scope.playerX;
+            $scope.lastPlay = { y: y, x: x }
+        }
     };
 }
