@@ -1,0 +1,37 @@
+/* box model reset for Twitter Bootstrap */
+*, *:after, *:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+input {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+.tictactoe-board {
+    margin: 5px;
+}
+
+.tictactoe-board tr td div {
+    display: block;
+    width: 40px;
+    height: 40px;
+}
+
+.empty {
+    border: 1px solid black;
+}
+
+.markX {
+    border: 5px solid darkred;
+    background-color: red;
+}
+
+
+.markO {
+    border: 5px solid darkgreen;
+    background-color: green;
+}

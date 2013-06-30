@@ -1,0 +1,38 @@
+<!doctype html>
+<html ng-app>
+<head>
+    <meta charset="utf-8">
+    <title>Tic Tac Toe</title>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+
+    <script type="text/javascript"
+            src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+
+    <script type="text/javascript" src="js/main.js"></script>
+</head>
+<body ng-controller="TicTacToeCtrl">
+
+<div class="container">
+    <h1>Tic Tac Toe</h1>
+
+    <h3>Current player: {{ currentPlayer.name }}</h3>
+    <table>
+        <tr ng-repeat="boardLine in bigBoard">
+            <td ng-repeat="board in boardLine">
+                <table class="tictactoe-board" ng-class="board.state">
+                    <tr ng-repeat="miniLine in board.repr">
+                        <td ng-repeat="mark in miniLine">
+                            <div ng-class="mark"></div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>
