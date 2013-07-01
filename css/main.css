@@ -36,10 +36,30 @@ input {
     background-position: 80px !important;
 }
 
+.won-markX {
+    background-color: darkred;
+}
+
+.won-markO {
+    background-color: darkgray;
+}
+
 .board-locked {
     background-color: #ddd;
 }
 
 .board-open {
-    background-color: transparent;
+    background-color: #fff;
+}
+
+.board-wrapper {
+    padding: 5px;
+}
+
+.player-markX {
+    color: darkred;
+}
+
+.player-markO {
+    color: #666;
 }

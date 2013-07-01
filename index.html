@@ -16,23 +16,32 @@
 <body ng-controller="TicTacToeCtrl">
 
 <div class="container">
-    <h1>Tic Tac Toe</h1>
+    <h1>Ultimate Tic Tac Toe</h1>
 
-    <h3>Current player: {{ currentPlayer.name }}</h3>
+    <h3 class="player-{{ currentPlayer.mark }}">Current player: {{ currentPlayer.name }}</h3>
     <table>
         <tr ng-repeat="(boardY, boardLine) in parentBoard">
             <td ng-repeat="(boardX, board) in boardLine">
-                <table class="tictactoe-board" ng-class="board.state">
-                    <tr ng-repeat="(y, miniLine) in board.repr">
-                        <td ng-repeat="(x, mark) in miniLine">
-                            <div ng-class="mark" ng-click="play(boardY, boardX, y, x)">
-                            </div>
-                        </td>
-                    </tr>
-                </table>
+                <div class="board-wrapper" ng-class="board.winner">
+                    <table class="tictactoe-board" ng-class="board.state">
+                        <tr ng-repeat="(y, miniLine) in board.repr">
+                            <td ng-repeat="(x, mark) in miniLine">
+                                <div ng-class="mark" ng-click="play(boardY, boardX, y, x)">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </td>
         </tr>
     </table>
+
+    <p>
+        <small>Created by <a href="http://eljunior.wordpress.com">Elias Dorneles</a>, after reading <a
+                href="http://mathwithbaddrawings.com/2013/06/16/ultimate-tic-tac-toe/">a blog post describing the
+            game</a>.
+        </small>
+    </p>
 </div>
 
 </body>
