@@ -11,10 +11,6 @@ input {
     box-sizing: content-box;
 }
 
-.tictactoe-board {
-    margin: 5px;
-}
-
 .tictactoe-board tr td div {
     display: block;
     width: 40px;
@@ -41,7 +37,7 @@ input {
 }
 
 .won-markO {
-    background-color: darkgray;
+    background-color: #666;
 }
 
 .board-locked {
@@ -53,7 +49,11 @@ input {
 }
 
 .board-wrapper {
-    padding: 5px;
+    padding: 8px;
+}
+
+.game-over {
+    opacity: 0.5;
 }
 
 .player-markX {
