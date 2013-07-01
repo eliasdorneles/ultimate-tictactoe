@@ -20,12 +20,12 @@
 
     <h3>Current player: {{ currentPlayer.name }}</h3>
     <table>
-        <tr ng-repeat="(bbY, boardLine) in bigBoard">
-            <td ng-repeat="(bbX, board) in boardLine">
+        <tr ng-repeat="(boardY, boardLine) in parentBoard">
+            <td ng-repeat="(boardX, board) in boardLine">
                 <table class="tictactoe-board" ng-class="board.state">
                     <tr ng-repeat="(y, miniLine) in board.repr">
-                        <td ng-repeat="mark in miniLine">
-                            <div ng-class="mark" ng-click="play(bbY, bbX, y, $index)">
+                        <td ng-repeat="(x, mark) in miniLine">
+                            <div ng-class="mark" ng-click="play(boardY, boardX, y, x)">
                             </div>
                         </td>
                     </tr>
