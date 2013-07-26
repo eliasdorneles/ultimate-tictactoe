@@ -47,6 +47,34 @@ var TicTacToeCtrl = function ($scope) {
 
     $scope.gameOver = false;
 
+    function gameAsJson() {
+        var filterHashKeys = function (key, val) {
+            return (key == '$$hashKey') ? undefined : val;
+        };
+        return JSON.stringify({
+            board: $scope.parentBoard,
+            currentPlayer: $scope.currentPlayer.mark,
+            gameOver: $scope.gameOver
+        }, filterHashKeys);
+    }
+
+    function gameFromJson(str) {
+        var parsed = JSON.parse(str);
+        $scope.parentBoard = parsed.board;
+        $scope.currentPlayer = ($scope.playerX.mark == parsed.currentPlayer) ? $scope.playerX : $scope.playerO;
+        $scope.gameOver = parsed.gameOver;
+    }
+
+    $scope.saveGame = function () {
+        $scope.saved = gameAsJson();
+    }
+
+    $scope.restoreGame = function () {
+        if ($scope.saved) {
+            gameFromJson($scope.saved);
+        }
+    };
+
     function isBoardFull(boardY, boardX) {
         var parentBoardRepr = $scope.parentBoard[boardY][boardX].repr;
         for (var i = 0; i < parentBoardRepr.length; i++) {
