@@ -39,6 +39,7 @@
             </tr>
         </table>
 
+        <button ng-click="undoLastPlay()" ng-show="previousGames.length">Undo</button>
         <button ng-click="saveGame()">Save Game</button>
         <button ng-click="restoreGame()">Restore Saved Game</button>
     </div>

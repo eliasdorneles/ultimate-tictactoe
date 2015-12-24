@@ -47,7 +47,9 @@ var TicTacToeCtrl = function ($scope) {
 
     $scope.gameOver = false;
 
-    function gameAsJson() {
+    $scope.previousGames = [];
+
+    function currentGameAsJson() {
         var filterHashKeys = function (key, val) {
             return (key == '$$hashKey') ? undefined : val;
         };
@@ -58,22 +60,34 @@ var TicTacToeCtrl = function ($scope) {
         }, filterHashKeys);
     }
 
-    function gameFromJson(str) {
+    function restoreGameFromJson(str) {
         var parsed = JSON.parse(str);
         $scope.parentBoard = parsed.board;
         $scope.currentPlayer = ($scope.playerX.mark == parsed.currentPlayer) ? $scope.playerX : $scope.playerO;
         $scope.gameOver = parsed.gameOver;
+        console.log('Game restored');
     }
 
     $scope.saveGame = function () {
-        $scope.saved = gameAsJson();
+        $scope.saved = currentGameAsJson();
+        console.log('Game saved');
     }
 
     $scope.restoreGame = function () {
         if ($scope.saved) {
-            gameFromJson($scope.saved);
+            restoreGameFromJson($scope.saved);
+        } else {
+            console.log('No game previously saved');
         }
     };
+
+    $scope.undoLastPlay = function() {
+        if ($scope.previousGames.length) {
+            restoreGameFromJson($scope.previousGames.pop());
+        } else {
+            console.log('No previously game saved');
+        }
+    }
 
     function isBoardFull(boardY, boardX) {
         var parentBoardRepr = $scope.parentBoard[boardY][boardX].repr;
@@ -169,6 +183,8 @@ var TicTacToeCtrl = function ($scope) {
             console.log('Invalid play');
             return;
         }
+        $scope.previousGames.push(currentGameAsJson());
+
         $scope.parentBoard[boardY][boardX].repr[y][x] = $scope.currentPlayer.mark;
 
         if (playWinsBoard(boardY, boardX)) {
