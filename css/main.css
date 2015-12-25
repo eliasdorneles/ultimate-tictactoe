@@ -32,16 +32,23 @@ input {
     background-position: 80px !important;
 }
 
-.won-markX {
-    background-color: darkred;
+.won-markX, .won-markO {
+    background-size: 360px 130px;
+    background-repeat: no-repeat;
+    background-image: url("../img/sprite.png");
+    position: relative;
+}
+
+.won-markX .tictactoe-board, .won-markO .tictactoe-board {
+    opacity: 0.8;
 }
 
 .won-markO {
-    background-color: #666;
+    background-position: -120px;
 }
 
 .board-locked {
-    background-color: #ddd;
+    background-color: #ccc;
 }
 
 .board-open {
@@ -49,7 +56,7 @@ input {
 }
 
 .board-wrapper {
-    padding: 8px;
+    padding: 8px 8px 0 0;
 }
 
 .game-over {
@@ -62,4 +69,9 @@ input {
 
 .player-markO {
     color: #666;
+}
+
+table.big-board {
+    margin-left: -5px;
+    margin-top: 10px;
 }
