@@ -3,26 +3,31 @@
 <head>
     <meta charset="utf-8">
     <title>Tic Tac Toe</title>
-    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
 </head>
 <body ng-controller="TicTacToeCtrl">
 
 <div class="container">
-    <h1>Ultimate Tic Tac Toe</h1>
+    <div class="span12">
+        <h1>
+            Ultimate Tic Tac Toe
+            <div><small>Beware where you'll send your opponent!</small></div>
+        </h1>
 
-    <h2>
-        <small>Beware where you'll send your opponent</small>
-    </h2>
 
-    <h3 class="player-{{ currentPlayer.mark }}" ng-show="!gameOver">
-        Current player: {{ currentPlayer.name }}
-    </h3>
-
-    <h3 class="player-{{ currentPlayer.mark }}" ng-show="gameOver">Winner: {{ currentPlayer.name }}</h3>
+        <h3 class="player-{{ currentPlayer.mark }}" ng-show="!gameOver">
+            Turn: {{ currentPlayer.name }}
+        </h3>
+    </div>
 
     <div class="span6">
-        <table ng-class="{'game-over': gameOver}">
+        <div class="game-controls">
+            <button ng-click="restart()">Restart</button>
+            <button ng-click="undoLastPlay()" ng-show="previousGames.length">Undo</button>
+        </div>
+
+        <table class="big-board" ng-class="{'game-over': gameOver}">
             <tr ng-repeat="(boardY, boardLine) in parentBoard">
                 <td ng-repeat="(boardX, board) in boardLine">
                     <div class="board-wrapper" ng-class="board.winner">
@@ -38,26 +43,23 @@
                 </td>
             </tr>
         </table>
-
-        <button ng-click="undoLastPlay()" ng-show="previousGames.length">Undo</button>
-        <button ng-click="saveGame()">Save Game</button>
-        <button ng-click="restoreGame()">Restore Saved Game</button>
     </div>
     <div class="span3">
         <h1 ng-show="gameOver">Game Over</h1>
+        <h3 class="player-{{ currentPlayer.mark }}" ng-show="gameOver">Winner: {{ currentPlayer.name }}</h3>
     </div>
 
     <p class="span12">
-        <small>Created by <a href="http://eljunior.wordpress.com">Elias Dorneles</a>, after reading <a
+        <small>Created by <a href="//eliasdorneles.github.io">Elias Dorneles</a>, after reading <a
                 href="http://mathwithbaddrawings.com/2013/06/16/ultimate-tic-tac-toe/">a blog post describing the
             game</a>.
         </small>
     </p>
 </div>
 <script type="text/javascript"
-        src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-<!--<script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>-->
+        src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-touch.js"></script>
 
 <script type="text/javascript" src="js/main.js"></script>
 </body>
