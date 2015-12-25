@@ -19,9 +19,8 @@
         <h3 class="player-{{ currentPlayer.mark }}" ng-show="!gameOver">
             Turn: {{ currentPlayer.name }}
         </h3>
-    </div>
+        <h3 class="player-{{ currentPlayer.mark }}" ng-show="gameOver">{{ currentPlayer.name }} wins!</h3>
 
-    <div class="span6">
         <div class="game-controls">
             <button ng-click="restart()">Restart</button>
             <button ng-click="undoLastPlay()" ng-show="previousGames.length">Undo</button>
@@ -43,10 +42,6 @@
                 </td>
             </tr>
         </table>
-    </div>
-    <div class="span3">
-        <h1 ng-show="gameOver">Game Over</h1>
-        <h3 class="player-{{ currentPlayer.mark }}" ng-show="gameOver">Winner: {{ currentPlayer.name }}</h3>
     </div>
 
     <p class="span12">
