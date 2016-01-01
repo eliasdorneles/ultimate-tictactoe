@@ -5,6 +5,10 @@
     box-sizing: border-box;
 }
 
+table.big-board {
+    zoom: 120%;
+}
+
 input {
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
