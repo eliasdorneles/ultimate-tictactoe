@@ -3,7 +3,7 @@
 The Ultimate Tic Tac Toe is a sophisticated version of Tic Tac Toe, where your
 move determines which board your opponent will play next.
 
-It's loads of fun, try it out: http://eliasdorneles.github.io/tictactoe/
+It's loads of fun, try it out: http://eliasdorneles.github.io/ultimate-tictactoe/
 
 
 Based on [a post from the awesome blog Math with Bad
